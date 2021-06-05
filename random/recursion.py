@@ -24,9 +24,8 @@ def remove_char(string, char):
         return string
 
     char_loc = string.find(char) # location of first instance of char in string
-    new_string = string[0:char_loc] + string[char_loc+1:]
     
-    return remove_char(new_string, char)
+    return remove_char(string[0:char_loc] + string[char_loc+1:], char)
 
 
 
