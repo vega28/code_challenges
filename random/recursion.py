@@ -1,10 +1,13 @@
 # Create a recursive function that takes in a string and a character
 # and returns the string with any instances of that character removed.
 
+# Constraints:
+#   do not use str.replace()
+
 def remove_char(string, char):
-    """ given a string and a character, 
+    """ Given a string and a character, 
         remove all instances of that character from that string,
-        return the resulting string
+        return the resulting string.
 
         e.g.
         >>> remove_char('abba', 'b')
@@ -12,12 +15,18 @@ def remove_char(string, char):
 
         >>> remove_char('aaaaaa', 'A')
         'aaaaaa'
+
+        >>> remove_char('', 'a')
+        ''
     """
 
-    if char not in string: # base case - exit out of recursion when this condition is met
+    if char not in string: # base case: stop recursion when this condition is met
         return string
 
-    pass # TODO: write this recursive function!
+    char_loc = string.find(char) # location of first instance of char in string
+    new_string = string[0:char_loc] + string[char_loc+1:]
+    
+    return remove_char(new_string, char)
 
 
 
