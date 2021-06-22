@@ -24,10 +24,60 @@
 
 # Code:
 
+import math
+
+
 def get_distance(spider, fly):
-    """ Find and return the distance between the spider and the fly. """
-    
-    pass
+    """ Find and return the distance between the spider and the fly. 
+        method #1 - using a dictionary to convert the letter to an angle
+
+        e.g.
+        
+        >>> get_distance('H3', 'E2')
+        4.63522
+
+        """
+
+    # first, convert "web coordinates" to polar coordinates
+    angles = {
+        'A' : 0,
+        'B' : math.pi/4,
+        'C' : math.pi/2,
+        'D' : 3*math.pi/4,
+        'E' : math.pi,
+        'F' : 5*math.pi/4,
+        'G' : 3*math.pi/2,
+        'H' : 7*math.pi/4
+    }
+
+    r1, r2 = int(spider[1]), int(fly[1])
+    angle1, angle2 = angles[spider[0]], angles[fly[0]]
+
+    # then, use polar coordinate distance formula (law of cosines):
+    distance = math.sqrt(r1**2 + r2**2 -2*r1*r2*math.cos(angle1 - angle2))
+
+    return round(distance, 5)
+
+
+def get_distance_v2(spider, fly):
+    """ Find and return the distance between the spider and the fly. 
+        method #2 - using ascii table to convert the letter to an angle
+
+        e.g.
+        
+        >>> get_distance('H3', 'E2')
+        4.63522
+
+        """
+
+    # first, convert "web coordinates" to polar coordinates
+    r1, r2 = int(spider[1]), int(fly[1])
+    angle1, angle2 = (ord(spider[0])-65)*math.pi/4, (ord(fly[0])-65)*math.pi/4
+
+    # then, use polar coordinate distance formula (law of cosines):
+    distance = math.sqrt(r1**2 + r2**2 -2*r1*r2*math.cos(angle1 - angle2))
+
+    return round(distance, 5)
 
 
 #####################################################################
