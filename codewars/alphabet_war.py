@@ -34,16 +34,56 @@ def alphabet_war(s):
     
     e.g.
     >>> alphabet_war('s*zz')
-    Right side wins!
+    'Right side wins!'
     >>> alphabet_war('*zd*qm*wp*bs*')
-    Let's fight again!
+    "Let's fight again!"
     >>> alphabet_war('zzzz*s*')
-    Right side wins!
+    'Right side wins!'
     >>> alphabet_war('www*www****z')
-    Left side wins!
+    'Left side wins!'
     """
 
-    pass
+    left_side = {
+        'w' : 4,
+        'p' : 3,
+        'b' : 2,
+        's' : 1
+    }
+
+    right_side = {
+        'm' : 4,
+        'q' : 3,
+        'd' : 2,
+        'z' : 1
+    }
+
+    aftermath = [char for char in s]
+    
+    for i, char in enumerate(s): 
+        if char == '*':
+            aftermath[i] = '_'
+            if i < len(s) - 1:
+                aftermath[i+1] = '_'
+            if i > 0:
+                aftermath[i-1] = '_'
+
+    aft = ''.join(aftermath)
+
+    left_score = 0
+    right_score = 0
+
+    for char in aft:
+        if left_side.get(char):
+            left_score += left_side[char]
+        elif right_side.get(char):
+            right_score += right_side[char]
+
+    if right_score > left_score:
+        return "Right side wins!"
+    elif right_score < left_score:
+        return "Left side wins!"
+    else:
+        return "Let's fight again!"
 
 
 #####################################################################
