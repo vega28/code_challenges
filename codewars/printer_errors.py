@@ -30,19 +30,24 @@
 
 # Code:
 
-def printer_error(str):
-    """ return the error rate of the printer 
+def printer_error(s):
+    """ Take in string "s" and return the error rate of the printer. 
     
     e.g.
     >>> printer_error("aaabbbbhaijjjm")
-    0/14
+    '0/14'
 
     >>> printer_error("aaaxbbbbyyhwawiwjjjwwm")
-    8/22
+    '8/22'
 
     """
 
-    pass
+    errors = 0
+    for char in s:
+        if char not in "abcdefghijklm":
+            errors += 1
+
+    return f"{errors}/{len(s)}"
 
 
 #####################################################################
