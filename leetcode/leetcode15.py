@@ -15,14 +15,18 @@ class Solution:
             direction of travel for k allows a lot quicker math to skip over
             duplicates and jump to the next likely element to make real change
 
+            constraints:
+                3 <= nums.length <= 3000
+                -10**5 <= nums[i] <= 10**5
+
             utilize the 2-pointer method
         """
         
         n = len(nums)
-        nums.sort() # O(n)
+        nums.sort() 
         triplets_list = []
 
-        for i in range(n - 2): # O(n)-ish
+        for i in range(n - 2): # O(n)-ish (maybe more?)
             if i == 0 or not nums[i] == nums[i-1]: # skip duplicate i values
                 j, k = i + 1, n - 1
                 while j < k:
@@ -30,10 +34,10 @@ class Solution:
                     if total == 0: # store the triple, increment j, decrement k
                         triplets_list.append([nums[i], nums[j], nums[k]])
                         j += 1
-                        while j < k and nums[j] == nums[j-1]:
+                        while j < k and nums[j] == nums[j-1]: # skip duplicate j values
                             j += 1
                         k -= 1
-                        while j < k and nums[k] == nums[k+1]:
+                        while j < k and nums[k] == nums[k+1]: # skip duplicate k values
                             k -= 1
                     elif total > 0: # decrement k to reduce total towards zero
                         k -= 1
